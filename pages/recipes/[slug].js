@@ -10,7 +10,7 @@ const client = createClient({
 
 export const getStaticPaths = async () => {
   const res = await client.getEntries({ 
-    content_type: "recipe" 
+    content_type: "product" 
   })
 
   const paths = res.items.map(item => {
@@ -27,7 +27,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const { items } = await client.getEntries({
-    content_type: 'recipe',
+    content_type: 'product',
     'fields.slug': params.slug
   }) 
 
@@ -41,15 +41,15 @@ export const getStaticProps = async ({ params }) => {
   }
 
   return {
-    props: { recipe: items[0] },
+    props: { product: items[0] },
     revalidate: 1
   }
 }
 
-export default function RecipeDetails({ recipe }) {
-  if (!recipe) return <Skeleton />
+export default function RecipeDetails({ product }) {
+  if (!product) return <Skeleton />
 
-  const { featuredImage, title, cookingTime, ingredients, method } = recipe.fields
+  const { featuredImage, title, cookingTime, ingredients, method } = product.fields
 
   return (
     <div>

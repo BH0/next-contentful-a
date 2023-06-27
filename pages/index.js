@@ -8,23 +8,23 @@ export async function getStaticProps() {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   })
 
-  const res = await client.getEntries({ content_type: "recipe" })
+  const res = await client.getEntries({ content_type: "product" })
 
   return {
     props: {
-      recipes: res.items,
+      products: res.items,
     },
     revalidate: 1
   }
 }
 
-export default function Recipes({ recipes }) {
-  console.log(recipes)
+export default function Recipes({ products }) {
+  console.log(products)
 
   return (
     <div className="recipe-list">
-      {recipes.map(recipe => (
-        <RecipeCard key={recipe.sys.id} recipe={recipe} />
+      {products.map(product => (
+        <RecipeCard key={product.sys.id} product={product} />
       ))}
 
       <style jsx>{`
